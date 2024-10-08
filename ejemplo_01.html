@@ -31,6 +31,7 @@
                 var out = data.years + " años, ";
                 out += data.months + " meses, y ";
                 out += data.days + " días";
+                out += `<br>Proveedor: ${data.provider}`;
                 resultado.innerHTML = out;
             })
             .catch(error => {
@@ -78,6 +79,7 @@
                 name="ciudad"
                 required>
         <br>
+        
 
         <input type="button" value="Nada" onclick="alert('Nada por ahora');">
     </form>
