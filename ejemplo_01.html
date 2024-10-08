@@ -34,7 +34,7 @@
                 out += data.days + " días";
                 resultado.innerHTML = out;
 
-                provider.innerHTML += `<br>Proveedor: ${data.provider}`;
+                provider.innerHTML += `Proveedor: ${data.provider}`;
             })
             .catch(error => {
                 alert("Error al analizar la respuesta JSON: " + error);
