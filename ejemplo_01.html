@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <title>Llama Servicio</title>
     <script>
-        const portServicioEdad = 3022;
-        function llama_ServicioEdad(port) {
+        function llama_ServicioEdad() {
             const birthdate = document.getElementById('nacimiento').value;
+            const port = document.getElementById('puerto').value; // Obtener valor del puerto
+
+            if (!port) { // Si el puerto no ha sido ingresado
+                alert('Por favor, ingrese un número de puerto.');
+                return;
+            }
+
             fetch(`http://200.13.4.194:${port}/howoldareyou`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `birthdate=${birthdate}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `birthdate=${birthdate}`,
             })
             .then(response => escribeResultado(response))
-            .catch (error => escribeResultadoConError(error));
+            .catch(error => escribeResultadoConError(error));
         }
 
         function escribeResultado(response) {
@@ -33,13 +39,13 @@
         }
             
         function escribeResultadoConError(error) {
-            alert("Error: "+error);
+            alert("Error: " + error);
         }
     </script>
 </head>
 
 <body>
-    <h1>Ejemplo de Formulario con Invocación intermedia de Servicio</h1>
+    <h1>Ejemplo de Formulario con Invocación de Servicio</h1>
     <form id="miFormulario">
         <label for="name">Nombre:</label>
         <input  type="text"
@@ -47,21 +53,32 @@
                 name="name"
                 required>
         <br>
+
         <label for="nacimiento">Fecha de Nacimiento:</label>
         <input  type="date"
                 id="nacimiento"
                 name="nacimiento"
                 required
-                onChange="llama_ServicioEdad(portServicioEdad)">
+                onchange="llama_ServicioEdad()"> <!-- Llama la función automáticamente al cambiar la fecha -->
+        <br>
+
+        <!-- Campo para ingresar el puerto -->
+        <label for="puerto">Puerto:</label>
+        <input  type="text"
+                id="puerto"
+                name="puerto"
+                required>
         <br>
 
         <div id="resultado"></div>
+
         <label for="ciudad">Ciudad:</label>
         <input  type="text"
                 id="ciudad"
                 name="ciudad"
                 required>
         <br>
+
         <input type="button" value="Nada" onclick="alert('Nada por ahora');">
     </form>
 </body>
