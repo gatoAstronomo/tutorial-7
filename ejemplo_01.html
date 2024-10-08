@@ -26,13 +26,15 @@
 
         function escribeResultado(response) {
             var resultado = document.getElementById('resultado');
+            var provider = document.getElementById('provider');
             response.json() // Analiza la respuesta JSON (asíncrónica)
             .then(data => {
                 var out = data.years + " años, ";
                 out += data.months + " meses, y ";
                 out += data.days + " días";
-                out += `<br>Proveedor: ${data.provider}`;
                 resultado.innerHTML = out;
+
+                provider.innerHTML += `<br>Proveedor: ${data.provider}`;
             })
             .catch(error => {
                 alert("Error al analizar la respuesta JSON: " + error);
@@ -63,6 +65,8 @@
                 onchange="llama_ServicioEdad()"> <!-- Llama la función automáticamente al cambiar la fecha -->
         <br>
 
+        <div id="resultado"></div>
+
         <!-- Campo para ingresar el puerto -->
         <label for="puerto">Puerto:</label>
         <input  type="text"
@@ -71,7 +75,7 @@
                 required>
         <br>
 
-        <div id="resultado"></div>
+        <div id="provider"></div>
 
         <label for="ciudad">Ciudad:</label>
         <input  type="text"
