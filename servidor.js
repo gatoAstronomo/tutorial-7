@@ -12,5 +12,5 @@ app.get('/heroes', (req, res) => {
     res.sendFile(__dirname + '/ejemplo_02.html');
 });
 app.listen(port, () => {
-    console.log(`Servidor en ejecución en http://localhost:${port}`);
+    console.log(`Servidor ejecución en http://localhost:${port}`);
 });
