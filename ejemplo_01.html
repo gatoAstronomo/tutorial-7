@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Llama Servicio</title>
+    <script>
+        const port = 3022;
+        function llama_ServicioEdad(port) {
+            const birthdate = document.getElementById('nacimiento').value;
+            fetch('http://200.13.4.194:${port}/howoldareyou', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `birthdate=${birthdate}`,
+            })
+            .then(response => escribeResultado(response))
+            .catch (error => escribeResultadoConError(error));
+        }
+
+        function escribeResultado(response) {
+            var resultado = document.getElementById('resultado');
+            response.json() // Analiza la respuesta JSON (asíncrónica)
+            .then(data => {
+                var out = data.years + " años, ";
+                out += data.months + " meses, y ";
+                out += data.days + " días";
+                resultado.innerHTML = out;
+            })
+            .catch(error => {
+                alert("Error al analizar la respuesta JSON: " + error);
+            });
+        }
+            
+        function escribeResultadoConError(error) {
+            alert("Error: "+error);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ejemplo de Formulario con Invocación intermedia de Servicio</h1>
+    <form id="miFormulario">
+        <label for="name">Nombrex:</label>
+        <input  type="text"
+                id="name"
+                name="name"
+                required>
+        <br>
+        <label for="nacimiento">Fecha de Nacimiento:</label>
+        <input  type="date"
+                id="nacimiento"
+                name="nacimiento"
+                required
+                onChange="llama_ServicioEdad(port)">
+        <br>
+
+        <div id="resultado"></div>
+        <label for="ciudad">Ciudad:</label>
+        <input  type="text"
+                id="ciudad"
+                name="ciudad"
+                required>
+        <br>
+        <input type="button" value="Nada" onclick="alert('Nada por ahora');">
+    </form>
+</body>
+</html>
