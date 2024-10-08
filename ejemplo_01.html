@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Llama Servicio</title>
     <script>
-        const port = 3022;
+        const portServicioEdad = 3022;
         function llama_ServicioEdad(port) {
             const birthdate = document.getElementById('nacimiento').value;
             fetch('http://200.13.4.194:${port}/howoldareyou', {
@@ -52,7 +52,7 @@
                 id="nacimiento"
                 name="nacimiento"
                 required
-                onChange="llama_ServicioEdad(port)">
+                onChange="llama_ServicioEdad(portServicioEdad)">
         <br>
 
         <div id="resultado"></div>
